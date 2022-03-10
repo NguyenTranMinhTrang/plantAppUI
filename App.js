@@ -29,6 +29,7 @@ const App = () => {
         initialRouteName='TabBar'
       >
         <Stack.Screen name="TabBar" component={TabBar} options={{ headerShown: false }} />
+        <Stack.Screen name="Detail" component={Detail} />
       </Stack.Navigator>
     </NavigationContainer>
   );

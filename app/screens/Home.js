@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, Platform } from "react-native";
 import { icons, images, theme, COLORS, SIZES, FONTS } from "../constants";
 
-const Home = () => {
+const Home = ({ navigation }) => {
 
     // Dummy Data
     const [newPlants, setNewPlants] = React.useState([
@@ -195,7 +195,6 @@ const Home = () => {
                         >
                             <Text style={{ ...FONTS.h2, color: COLORS.secondary }}>Today's share</Text>
                             <TouchableOpacity
-                                onPress={() => console.log('')}
                             >
                                 <Text style={{ ...FONTS.body3, color: COLORS.secondary }}>See All</Text>
                             </TouchableOpacity>
@@ -215,7 +214,7 @@ const Home = () => {
                             >
                                 <TouchableOpacity
                                     style={{ flex: 1 }}
-                                    onPress={() => console.log('')}
+                                    onPress={() => navigation.navigate('Detail')}
                                 >
                                     <Image
                                         source={images.plant5}
@@ -230,7 +229,7 @@ const Home = () => {
 
                                 <TouchableOpacity
                                     style={{ flex: 1, marginTop: SIZES.base }}
-                                    onPress={() => console.log('')}
+                                    onPress={() => navigation.navigate('Detail')}
                                 >
                                     <Image
                                         source={images.plant6}
@@ -249,6 +248,8 @@ const Home = () => {
                                     flex: 1,
                                     marginLeft: SIZES.font
                                 }}
+
+                                onPress={() => navigation.navigate('Detail')}
                             >
                                 <Image
                                     source={images.plant7}
