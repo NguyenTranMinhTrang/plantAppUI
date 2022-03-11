@@ -1,10 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, StatusBar } from "react-native";
 import { icons, images, theme, COLORS, SIZES, FONTS } from "../constants";
 
 const Detail = ({ navigation }) => {
 
     function renderImage() {
+
+        React.useEffect(() => {
+            StatusBar.setBackgroundColor('#FF573300');
+            StatusBar.setTranslucent(true)
+        }, []);
+
         return (
             <View style={{ height: '35%', width: '100%' }}>
                 <Image
@@ -144,9 +150,49 @@ const Detail = ({ navigation }) => {
             )
         }
 
+        const RequirementDetail = ({ icon, title, text }) => {
+            return (
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingBottom: Platform.OS === 'ios' ? SIZES.padding / 2 : SIZES.padding
+                    }}
+                >
+                    {/* icon and title */}
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+
+                        }}
+                    >
+                        <Image
+                            source={icon}
+                            resizeMode="contain"
+                            style={{
+                                height: 25,
+                                width: 25,
+                                tintColor: COLORS.secondary
+                            }}
+                        />
+
+                        <Text style={{ ...FONTS.h3, color: COLORS.secondary, paddingLeft: SIZES.base * 2 }}>{title}</Text>
+                    </View>
+
+                    {/* text */}
+                    <View>
+                        <Text style={{ ...FONTS.h3, color: COLORS.secondary }}>{text}</Text>
+                    </View>
+                </View>
+            )
+        }
+
         return (
             <View
                 style={{
+                    flex: 1,
                     marginTop: -40,
                     borderTopLeftRadius: 50,
                     borderTopRightRadius: 50,
@@ -199,6 +245,107 @@ const Detail = ({ navigation }) => {
                 </View>
 
                 {/* Third row  - Info */}
+
+                <View
+                    style={{
+                        marginTop: Platform.OS === "ios" ? SIZES.padding : SIZES.padding * 2
+                    }}
+                >
+                    <RequirementDetail icon={icons.sun} title="Sunlight" text="15°C" />
+                    <RequirementDetail icon={icons.drop} title="Water" text="250 ML Daily" />
+                    <RequirementDetail icon={icons.temperature} title="Room Temp" text="25°C" />
+                    <RequirementDetail icon={icons.garden} title="Soil" text="3 Kg" />
+                    <RequirementDetail icon={icons.seed} title="Fertilizer" text="150 Mg" />
+                </View>
+
+                {/* Last row  - Info */}
+
+                <View
+                    style={{
+                        flex: 1,
+                        width: '100%',
+                        marginTop: Platform.OS === "ios" ? SIZES.padding / 2 : SIZES.padding,
+                        marginBottom: SIZES.padding,
+
+                    }}
+                >
+                    <View
+                        style={{
+                            height: '100%',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <TouchableOpacity
+                            style={{
+                                flex: 1,
+                                height: '100%',
+                                backgroundColor: COLORS.primary,
+                                marginLeft: - SIZES.padding,
+                                borderTopRightRadius: 25,
+                                borderBottomRightRadius: 25,
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center'
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        paddingRight: SIZES.padding
+                                    }}
+                                >
+                                    <Text style={{ ...FONTS.h3, color: COLORS.white }}>Take</Text>
+                                    <Text style={{ ...FONTS.h3, color: COLORS.white }}>Action</Text>
+                                </View>
+
+                                <Image
+                                    source={icons.chevron}
+                                    resizeMode="contain"
+                                    style={{
+                                        height: 25,
+                                        width: 25,
+                                    }}
+                                />
+                            </View>
+                        </TouchableOpacity>
+
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'flex-end',
+                                height: '100%',
+                            }}
+                        >
+                            <View
+                                style={{
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    paddingHorizontal: SIZES.padding
+                                }}
+                            >
+                                <Text style={{ ...FONTS.h3, color: COLORS.secondary }}>Almost 2 week</Text>
+                                <Text style={{ ...FONTS.h3, color: COLORS.secondary }}>of growing time</Text>
+                            </View>
+
+                            <Image
+                                source={icons.downArrow}
+                                resizeMode='contain'
+                                style={{
+                                    height: 25,
+                                    width: 25,
+                                    tintColor: COLORS.secondary,
+                                }}
+                            />
+                        </View>
+                    </View>
+
+                </View>
             </View>
         )
     }
